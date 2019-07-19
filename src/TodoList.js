@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Input, List } from 'antd';
 import store from './store'
+import { todoInputAction,addItemAction,delItemAction } from './store/actionCreates'
 import 'antd/dist/antd.css';
 
 class TodoList extends Component {
@@ -14,25 +15,16 @@ class TodoList extends Component {
         store.subscribe(this.storeChange)
     }
     todoChange = (e) => {
-        const action = {
-            type:'todoInput',
-            value:e.target.value
-        }
+        const action = todoInputAction(e.target.value)
         store.dispatch(action)
     }
     // 新增
     todoButton = () =>{
-        const action = {
-            type:'addItem'
-        }
+        const action = addItemAction()
         store.dispatch(action)
     }
     delItem =(index) =>{
-        console.log(index)
-        const action = {
-            type:'delItem',
-            value:index
-        }
+        const action = delItemAction(index)
         store.dispatch(action);
     }
     storeChange = () =>{
